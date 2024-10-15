@@ -1,10 +1,8 @@
 #pragma once
 #ifndef POINT3_H_
 #define POINT3_H_
-#include <iostream>
-#include <vector>
 
-namespace EPGIS_3D {
+namespace BBGLOBE {
 
 	/** 3D点坐标，模板类，可表示三维空间坐标的点，向量, 也可进行三维的数值运算 */
 	template<typename T>
@@ -49,9 +47,9 @@ namespace EPGIS_3D {
 		{
 			if (this == &point)  return true;
 
-			if (!Math::IsFloatEqual(_v[0], point._v[0])) return false;
-			if (!Math::IsFloatEqual(_v[1], point._v[1])) return false;
-			if (!Math::IsFloatEqual(_v[2], point._v[2])) return false;
+			//if (!Math::IsFloatEqual(_v[0], point._v[0])) return false;
+			//if (!Math::IsFloatEqual(_v[1], point._v[1])) return false;
+			//if (!Math::IsFloatEqual(_v[2], point._v[2])) return false;
 
 			return true;
 		}
@@ -128,17 +126,18 @@ namespace EPGIS_3D {
 		}
 
 		/** \brief 归一化点坐标 */
-		T normalize()
+		Point3 normalize()
 		{
 			T norm = Point3::length();
+			Point3 inv;
 			if (norm > 0.0)
 			{
-				T inv = 1.0 / norm;
+				inv = 1.0 / norm;
 				_v[0] *= inv;
 				_v[1] *= inv;
 				_v[2] *= inv;
 			}
-			return(norm);
+			return inv;
 		}
 
 		/** \brief 设置x,y,z轴的分量
@@ -178,11 +177,6 @@ namespace EPGIS_3D {
 	typedef Point3<int>    Point3i;
 	typedef Point3<float>  Point3f;
 	typedef Point3<double> Point3d;
-
-	//using Point3i = Point3<int>;
-	//using Point3f = Point3<float>;
-	//using Point3d = Point3<double>;
-
-}// end of namespace EPGIS_3D
+}
 
 #endif

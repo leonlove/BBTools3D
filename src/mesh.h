@@ -3,6 +3,9 @@
 
 #include <vector>
 #include "utils/Point3.h"
+
+using namespace BBGLOBE;
+
 /**
 * @brief 自定义网格类
 */
@@ -12,6 +15,7 @@ public:
 	Mesh(){}
 	~Mesh(){}
 private:
-	std::vector<Point3d> mVertex;
+	std::vector<Point3d> mVertices;
+	std::vector<Point3d> mNormals;
 };
 #endif

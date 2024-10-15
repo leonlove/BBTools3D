@@ -12,7 +12,7 @@ set(CMAKE_CXX_STANDARD 11)
 
 set(SRC_DIR ${CMAKE_SOURCE_DIR}/src)
 
-file(GLOB_RECURSE header_files "${SRC_DIR}/*.h")
+file(GLOB_RECURSE header_files "${SRC_DIR}/*.h" "${SRC_DIR}/*.inl")
 file(GLOB_RECURSE source_files "${SRC_DIR}/*.cpp")
 
 # TREE "${CMAKE_CURRENT_SOURCE_DIR}" 告诉CMake根据文件相对于 ${CMAKE_CURRENT_SOURCE_DIR} 的路径来组织它们。
