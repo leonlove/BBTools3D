@@ -14,8 +14,8 @@ namespace BBGLOBE {
 		~TaskManager();
 
 	private:
-		DataLoader	mDataLoader;
-		Processor	mProcessor;
-		Converter	mConverter;
+		DataLoader	mDataLoader;			//数据加载类
+		Processor	mProcessor;				//数据处理类
+		Converter	mConverter;				//数据转换类
 	};
 }
