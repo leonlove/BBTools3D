@@ -1,4 +1,6 @@
 #pragma once
+#include <memory>
+#include "../Core/Base3DData.h"
 
 namespace BBGLOBE {
 	/*
@@ -10,7 +12,8 @@ namespace BBGLOBE {
 	public:
 		DataLoader();
 		~DataLoader();
-	private:
 
+	public:
+		std::shared_ptr<Base3DData> LoadModel();
 	};
 }
