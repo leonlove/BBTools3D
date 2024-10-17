@@ -16,7 +16,7 @@ namespace BBGLOBE {
 		TaskManager();
 		~TaskManager();
 
-		bool LoadData(DataType eDataType);
+		bool LoadData(std::string fileName,DataType eDataType);
 		bool ProcessData();
 		bool Converter3DTiles();
 

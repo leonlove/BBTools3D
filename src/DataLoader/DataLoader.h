@@ -14,6 +14,6 @@ namespace BBGLOBE {
 		~DataLoader();
 
 	public:
-		std::shared_ptr<Base3DData> LoadModel();
+		std::shared_ptr<Base3DData> LoadModel(const std::string& fileName);
 	};
 }

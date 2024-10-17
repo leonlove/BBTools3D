@@ -1,6 +1,7 @@
 #pragma once
 
 #include <vector>
+#include <memory>
 #include "../utils/Point2.h"
 #include "../utils/Point3.h"
 
@@ -28,7 +29,6 @@ namespace BBGLOBE {
 	public:
 		Mesh() {}
 		~Mesh() {}
-
 
 	private:
 		MeshType			 mMeshType;				//Õ¯∏Ò¿‡–Õ

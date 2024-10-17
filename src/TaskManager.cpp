@@ -12,12 +12,12 @@ BBGLOBE::TaskManager::~TaskManager()
 
 }
 
-bool BBGLOBE::TaskManager::LoadData(DataType eDataType)
+bool BBGLOBE::TaskManager::LoadData(std::string fileName, DataType eDataType)
 {
 	switch (eDataType)
 	{
 	case BBGLOBE::DataType::eDataTypeModel:
-		mCurrentData = mDataLoader.LoadModel();
+		mCurrentData = mDataLoader.LoadModel(fileName);
 		break;
 	case BBGLOBE::DataType::eDataTypePoint:
 		break;

@@ -7,9 +7,10 @@ using namespace BBGLOBE;
 
 int main(){
 	//1. 获取数据相关参数；如数据输入路径、输出路径、数据类型
+	std::string fileName = "";
 
 	TaskManager taskManager;
-	if (!taskManager.LoadData(DataType::eDataTypeModel))
+	if (!taskManager.LoadData(fileName,DataType::eDataTypeModel))
 	{
 		cout << "LoadData failed!" << endl;
 		return -1;
