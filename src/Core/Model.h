@@ -1,6 +1,8 @@
 #pragma once
 
 #include <string>
+#include <vector>
+#include "mesh.h"
 #include "Base3DData.h"
 
 namespace BBGLOBE {
@@ -19,5 +21,12 @@ namespace BBGLOBE {
 		std::string getType() const override {
 			return "Model";
 		}
+
+		void AddMesh(MeshPtr mesh);
+
+	private:
+		std::vector<MeshPtr> mMeshs;
 	};
+
+	using ModelPtr = std::shared_ptr<Model>;
 }
