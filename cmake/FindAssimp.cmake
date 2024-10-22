@@ -1,46 +1,49 @@
-# 添加第三方库 ExternalProject模块
-include(ExternalProject)
+# FindASSIMP
+#
+# Locates ASSIMP and sets the following variables:
+#
+# ASSIMP_FOUND ASSIMP_INCLUDE_DIRS ASSIMP_LIBARY_DIRS ASSIMP_LIBRARIES
+# ASSIMP_VERSION_STRING
+#
+# ASSIMP_FOUND is set to YES only when all other variables are successfully
+# configured.
 
-if(MSVC)
-    set(lib_name assimp-vc${MSVC_TOOLSET_VERSION}-mt)
-else()
-    set(lib_name assimp)
+unset(ASSIMP_FOUND)
+unset(ASSIMP_INCLUDE_DIRS)
+unset(ASSIMP_LIBRARY_DIRS)
+unset(ASSIMP_LIBRARIES)
+
+mark_as_advanced(ASSIMP_FOUND)
+mark_as_advanced(ASSIMP_INCLUDE_DIRS)
+mark_as_advanced(ASSIMP_LIBRARY_DIRS)
+mark_as_advanced(ASSIMP_LIBRARIES)
+
+set(assimp_header_file "assimp/mesh.h")
+
+# Set ASSIMP_INCLUDE_DIRS
+find_path(ASSIMP_INCLUDE_DIRS NAMES "${assimp_header_file}")
+find_library(ASSIMP_LIBRARIES NAMES libassimp.a libassimp.so assimp-vc140-mt.lib assimp-vc140-mt.dll assimp.dll assimp.lib)
+get_filename_component(ASSIMP_LIBRARY_DIRS ${ASSIMP_LIBRARIES} DIRECTORY)
+
+if(ASSIMP_INCLUDE_DIRS AND ASSIMP_LIBRARIES AND ASSIMP_LIBRARY_DIRS)
+  set(ASSIMP_FOUND YES)
+  set(ASSIMP_LIBRARIE ${ASSIMP_LIBRARIES})
 endif()
 
-# IntelLLVM (SYCL) compiler defaults to fast math, causing NaN comparison code
-# compilation error.
-if(CMAKE_CXX_COMPILER_ID MATCHES "IntelLLVM")
-    set(assimp_cmake_cxx_flags "${CMAKE_CXX_FLAGS} -ffp-contract=on -fno-fast-math")
-else()
-    set(assimp_cmake_cxx_flags "${CMAKE_CXX_FLAGS}")
+if(ASSIMP_FOUND)
+    if(NOT ASSIMP_FIND_QUIETLY)
+    message(STATUS "Found ASSIMP :${ASSIMP_LIBRARIES}")
+    endif(NOT ASSIMP_FIND_QUIETLY)
+else(ASSIMP_FOUND)  
+    if(NOT ASSIMP_FIND_REQUIRED)
+        message(FATAL_ERROR "Could not find ASSIMP")
+    endif(NOT ASSIMP_FIND_REQUIRED)
+endif(ASSIMP_FOUND)
+
+if(FIND_LOG)
+    message(STATUS ${ASSIMP_FOUND})
+    message(STATUS ${ASSIMP_INCLUDE_DIRS})
+    message(STATUS ${ASSIMP_LIBRARY_DIRS})
+    message(STATUS ${ASSIMP_LIBRARIES})
 endif()
 
-		
-# 使用ExternalProject_Add 下载并编译 Assimp
-ExternalProject_Add(
-	ext_assimp
-	PREFIX assimp # 目录前缀
-	URL https://github.com/assimp/assimp/archive/cfed74516b46a7c2bdf19c1643c448363bd90ad7.tar.gz
-	URL_HASH SHA256=b2f1c9450609f3bf201aa63b0b16023073d0ebb1c6e9ae5a832441f1e43c634c
-	DOWNLOAD_DIR "${THIRD_PARTY_DOWNLOAD_DIR}/assimp" #建议选个编译目录同级的，这样删掉编译目录后，就相当于缓存目录了，下次再编译就可以节约下载时间
-	CMAKE_ARGS
-		${ExternalProject_CMAKE_ARGS_hidden}
-		-DCMAKE_CXX_FLAGS:STRING=${assimp_cmake_cxx_flags}
-		-DBUILD_SHARED_LIBS=OFF
-		-DCMAKE_INSTALL_PREFIX=<INSTALL_DIR>
-		-DASSIMP_BUILD_ASSIMP_TOOLS=OFF
-		-DASSIMP_BUILD_TESTS=OFF
-		-DASSIMP_INSTALL_PDB=OFF
-		-DASSIMP_BUILD_ZLIB=ON
-		-DASSIMP_NO_EXPORT=OFF
-		-DHUNTER_ENABLED=OFF # Renamed to "ASSIMP_HUNTER_ENABLED" in newer assimp.
-		-DCMAKE_DEBUG_POSTFIX=
-	BUILD_BYPRODUCTS
-		<INSTALL_DIR>/${BBTools3D_INSTALL_LIB_DIR}/${CMAKE_STATIC_LIBRARY_PREFIX}${lib_name}${CMAKE_STATIC_LIBRARY_SUFFIX}
-		<INSTALL_DIR>/${BBTools3D_INSTALL_LIB_DIR}/${CMAKE_STATIC_LIBRARY_PREFIX}IrrXML${CMAKE_STATIC_LIBRARY_SUFFIX}
-)
-
-ExternalProject_Get_Property(ext_assimp INSTALL_DIR)
-set(ASSIMP_INCLUDE_DIR ${INSTALL_DIR}/include/)
-set(ASSIMP_LIB_DIR ${INSTALL_DIR}/${BBTools3D_INSTALL_LIB_DIR})
-set(ASSIMP_LIBRARIES ${lib_name})

@@ -20,6 +20,7 @@ bool BBGLOBE::TaskManager::LoadData(std::string fileName, DataType eDataType)
 		mCurrentData = mDataLoader.LoadModel(fileName);
 		break;
 	case BBGLOBE::DataType::eDataTypePoint:
+		mCurrentData = mDataLoader.LoadLas(fileName);
 		break;
 	case BBGLOBE::DataType::eDataTypeGIM:
 		break;

@@ -5,6 +5,23 @@ project(BBTools3D)
 
 # 设置C++编译选项
 set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+# 往CMAKE_MODULE_PATH变量中添加${CMAKE_SOURCE_DIR}/cmake路径
+list(APPEND CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake")
+
+# 设置第三方库路径
+set(THIRD_PARTY_INSTALL_DIR ${CMAKE_SOURCE_DIR}/third/install)
+
+# 添加Assimp
+# find_package(assimp REQUIRED)
+include_directories(${THIRD_PARTY_INSTALL_DIR}/assimp/include)
+link_directories(${THIRD_PARTY_INSTALL_DIR}/assimp/lib)
+
+# 添加laslib
+# find_package(laslib REQUIRED)
+include_directories(${THIRD_PARTY_INSTALL_DIR}/laslib/include)
+link_directories(${THIRD_PARTY_INSTALL_DIR}/laslib/lib)
 
 # 查找指定目录下的所有源文件，并将名称保存到制定变量名
 # 但是不会把头文件添加进去。需使用另一种办法 使用FILE变量
@@ -23,4 +40,11 @@ source_group(TREE "${CMAKE_CURRENT_SOURCE_DIR}/src" PREFIX "Source Files" FILES 
 
 # 编译源码生成目标
 add_executable(BBTools3D ${source_files} ${header_files})
+
+
+# 链接第三方库
+target_link_libraries(BBTools3D
+    ${THIRD_PARTY_INSTALL_DIR}/assimp/lib/assimp-vc140-mt.lib
+	${THIRD_PARTY_INSTALL_DIR}/laslib/lib/Laslib.lib
+)
 
