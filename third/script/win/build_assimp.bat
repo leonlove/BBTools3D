@@ -39,9 +39,10 @@ set second=%datetime:~12,2%
 echo %year%-%month%-%day% %hour%:%minute%:%second%
 echo %year%-%month%-%day% %hour%:%minute%:%second% >> %log_file%
 
-set package_name=assimp-5.2.5.tar.gz
+set package_name=assimp-5.0.1.tar.gz
 set package_dir=%dir_build%\assimp
 
+:: 解压源码包
 cd %dir_build%
 if not exist %package_dir% (
 
@@ -56,28 +57,46 @@ if not exist %package_dir% (
 		echo Failed to extract .gz part of %package_name%. >> %log_file%
 		exit /b %ERRORLEVEL%
 	)
-	
-	echo "xxx.tar"
-	
-	:: 获取解压后的.tar文件名
-	for %%F in ("%package_dir%\*.tar") do set "TarFile=%%F"
-
-	echo %TarFile%
-
-	:: 使用7z.exe解压.tar文件
-	"%SevenZipPath%" x "%TarFile%" -o"%package_dir%"
-
-	:: 检查解压.tar部分是否成功
-	if %ERRORLEVEL% neq 0 (
-		echo Failed to extract .tar part of %TarFile%.
-		exit /b %ERRORLEVEL%
-	)
 )
-REM 1. 获取安装包
-REM echo %current_dir%
-REM echo "set dir_build %dir_build%"
-REM echo %vs_version%
-REM echo %cmake_generator%
-REM 2. 编译
 
-REM pause>nul 
+:: 获取解压后的.tar文件名
+for %%F in ("%package_dir%\*.tar") do set "TarFile=%%F"
+
+echo %TarFile%
+
+:: 使用7z.exe解压.tar文件
+"%SevenZipPath%" x "%TarFile%" -o"%package_dir%"
+
+:: 检查解压.tar部分是否成功
+if %ERRORLEVEL% neq 0 (
+	echo Failed to extract .tar part of %TarFile%.
+	exit /b %ERRORLEVEL%
+)
+
+:: 创建cmake源码编译路径
+set package_dir_build=%package_dir%\assimp-5.0.1\build
+if not exist %package_dir_build% (
+	mkdir %package_dir_build%
+)
+cd %package_dir_build%
+
+"%CMakeExePath%" .. -G %cmake_generator% -DCMAKE_INSTALL_PREFIX=%dir_install%
+
+if ERRORLEVEL 1 goto ERROREXIT
+
+"%CMakeExePath%" --build . --target INSTALL --config Release
+
+:: 获取日期和时间
+for /f "tokens=2 delims==" %%a in ('wmic os get localdatetime /value') do set datetime=%%a
+set year=%datetime:~0,4%
+set month=%datetime:~4,2%
+set day=%datetime:~6,2%
+set hour=%datetime:~8,2%
+set minute=%datetime:~10,2%
+set second=%datetime:~12,2%
+
+:: 格式化输出且输出到日志文件中
+echo %year%-%month%-%day% %hour%:%minute%:%second%
+echo %year%-%month%-%day% %hour%:%minute%:%second% >> %log_file%
+
+echo "building assimp done"

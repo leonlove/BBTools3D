@@ -27,6 +27,13 @@ if not exist "%SevenZipPath%" (
 	exit /b 1
 )
 
+set "CMakeExePath=D:\Program Files\CMake\bin\cmake.exe"
+:: 检查7z.exe工具是否存在
+if not exist "%CMakeExePath%" (
+	echo CMake not found at %CMakeExePath%.
+	exit /b 1
+)
+
 if not exist %dir_build% (
 	echo Creating build directory...
 	mkdir %dir_build%
