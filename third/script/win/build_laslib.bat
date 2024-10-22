@@ -80,7 +80,7 @@ if not exist %package_dir_build% (
 )
 cd %package_dir_build%
 
-"%CMakeExePath%" .. -G %cmake_generator% -DCMAKE_INSTALL_PREFIX=%dir_install%
+"%CMakeExePath%" .. -G %cmake_generator% -DCMAKE_INSTALL_PREFIX=%dir_install%\laslib
 
 if ERRORLEVEL 1 goto ERROREXIT
 
