@@ -61,4 +61,11 @@ if %ERRORLEVEL% NEQ 0 (
 )
 echo %dir_root%\win\build_assimp.bat executed successfully.
 
+call %dir_root%\win\build_laslib.bat
+if %ERRORLEVEL% NEQ 0 (
+	echo The script failed with error level %ERRORLEVEL%.
+	exit /b %ERRORLEVEL%
+)
+echo %dir_root%\win\build_laslib.bat executed successfully.
+
 REM pause>nul 
