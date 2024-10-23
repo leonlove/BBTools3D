@@ -41,12 +41,12 @@ std::shared_ptr<Base3DData> DataLoader::LoadLas(const std::string& fileName)
 	cout << "Loading Las " << endl;
 	std::shared_ptr<Base3DData> _data3D = std::make_shared<Model>();
 
-	// ÉèÖÃLAS¶ÁÈ¡¶ÔÏó
+	// è®¾ç½®LASè¯»å–å¯¹è±¡
 	LASreadOpener lasreadopener;
 	lasreadopener.set_file_name(fileName.c_str());
 	LASreader* lasreader = lasreadopener.open();
 
-	// ¶ÁÈ¡µãÔÆÊý¾Ý
+	// è¯»å–ç‚¹äº‘æ•°æ®
 	int count = 0;
 	while (lasreader->read_point())
 	{

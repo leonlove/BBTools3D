@@ -9,7 +9,7 @@
 
 namespace BBGLOBE {
 	/*
-	** ¸ºÔğµ÷¶ÈÊı¾İ´¦ÀíµÄÕû¸öÁ÷³Ì
+	** è´Ÿè´£è°ƒåº¦æ•°æ®å¤„ç†çš„æ•´ä¸ªæµç¨‹
 	*/
 	class TaskManager {
 	public:
@@ -21,10 +21,10 @@ namespace BBGLOBE {
 		bool Converter3DTiles();
 
 	private:
-		DataLoader	mDataLoader;			//Êı¾İ¼ÓÔØÀà
-		Processor	mProcessor;				//Êı¾İ´¦ÀíÀà
-		Converter	mConverter;				//Êı¾İ×ª»»Àà
+		DataLoader	mDataLoader;			//æ•°æ®åŠ è½½ç±»
+		Processor	mProcessor;				//æ•°æ®å¤„ç†ç±»
+		Converter	mConverter;				//æ•°æ®è½¬æ¢ç±»
 
-		std::shared_ptr<Base3DData> mCurrentData;	//Êı¾İ¼ÓÔØÀà¼ÓÔØºóµÄÈıÎ¬Êı¾İ
+		std::shared_ptr<Base3DData> mCurrentData;	//æ•°æ®åŠ è½½ç±»åŠ è½½åçš„ä¸‰ç»´æ•°æ®
 	};
 }

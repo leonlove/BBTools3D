@@ -5,7 +5,7 @@
 namespace BBGLOBE {
 
 	/**
-	* @brief ×Ô¶¨ÒåÈıÎ¬Êı¾İ»ùÀà
+	* @brief è‡ªå®šä¹‰ä¸‰ç»´æ•°æ®åŸºç±»
 	*/
 	class Base3DData {
 	public:
@@ -13,7 +13,7 @@ namespace BBGLOBE {
 		virtual ~Base3DData() {}
 
 		/*
-		** ·µ»ØÊı¾İÀàĞÍ
+		** è¿”å›æ•°æ®ç±»å‹
 		*/
 		virtual std::string getType() const = 0;
 	};

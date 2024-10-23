@@ -6,7 +6,7 @@
 namespace BBGLOBE {
 
 	/**
-	* @brief ÈıÎ¬Êı¾İµãÔÆÀà
+	* @brief ä¸‰ç»´æ•°æ®ç‚¹äº‘ç±»
 	*/
 	class PointCloud: public Base3DData {
 	public:
@@ -14,7 +14,7 @@ namespace BBGLOBE {
 		virtual ~PointCloud() {}
 
 		/*
-		** ·µ»ØÊı¾İÀàĞÍ
+		** è¿”å›æ•°æ®ç±»å‹
 		*/
 		std::string getType() const override {
 			return "PointCloud";

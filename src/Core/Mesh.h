@@ -23,7 +23,7 @@ namespace BBGLOBE {
 	using VertexIndexArray = std::vector<unsigned int>;
 
 	/**
-	* @brief 自定义网格类
+	* @brief 鑷畾涔夌綉鏍肩被
 	*/
 	class Mesh {
 	public:
@@ -31,11 +31,11 @@ namespace BBGLOBE {
 		~Mesh() {}
 
 	private:
-		MeshType			 mMeshType;				//网格类型
-		std::vector<Point3d> mVertexs;				//网格顶点坐标
-		std::vector<Point3d> mNormals;				//网格法线坐标
-		UVVector			 mTextureUVs;			//网格纹理坐标
-		VertexIndexArray	 mVertexIndexs;			//网格顶点索引
+		MeshType			 mMeshType;				//缃戞牸绫诲瀷
+		std::vector<Point3d> mVertexs;				//缃戞牸椤剁偣鍧愭爣
+		std::vector<Point3d> mNormals;				//缃戞牸娉曠嚎鍧愭爣
+		UVVector			 mTextureUVs;			//缃戞牸绾圭悊鍧愭爣
+		VertexIndexArray	 mVertexIndexs;			//缃戞牸椤剁偣绱㈠紩
 	};
 
 	using MeshPtr = std::shared_ptr<Mesh>;

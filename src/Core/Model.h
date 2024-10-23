@@ -8,7 +8,7 @@
 namespace BBGLOBE {
 
 	/**
-	* @brief ×Ô¶¨ÒåÈıÎ¬Êı¾İ»ùÀà
+	* @brief è‡ªå®šä¹‰ä¸‰ç»´æ•°æ®åŸºç±»
 	*/
 	class Model: public Base3DData {
 	public:
@@ -16,7 +16,7 @@ namespace BBGLOBE {
 		virtual ~Model() {}
 
 		/*
-		** ·µ»ØÊı¾İÀàĞÍ
+		** è¿”å›æ•°æ®ç±»å‹
 		*/
 		std::string getType() const override {
 			return "Model";

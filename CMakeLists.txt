@@ -7,6 +7,19 @@ project(BBTools3D)
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+# Grouped compiler settings
+IF ((CMAKE_C_COMPILER_ID MATCHES "GNU") AND NOT CMAKE_COMPILER_IS_MINGW)
+  # hide all not-exported symbols
+  # SET(CMAKE_CXX_FLAGS_DEBUG "$ENV{CXXFLAGS} -O2 -Wall -g -ggdb -std=c++11 -fPIC") 
+  # SET(CMAKE_CXX_FLAGS_RELEASE "$ENV{CXXFLAGS} -O2 -Wall -fPIC -std=c++11")
+ELSEIF(MSVC)
+  # enable multi-core compilation with MSVC
+  add_compile_options(/MP)
+  add_compile_options(/MD)
+  add_compile_options(/bigobj)
+  add_compile_options(/utf-8)
+ENDIF()
+
 # 往CMAKE_MODULE_PATH变量中添加${CMAKE_SOURCE_DIR}/cmake路径
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake")
 

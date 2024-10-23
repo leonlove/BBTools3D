@@ -6,7 +6,7 @@ using namespace std;
 using namespace BBGLOBE;
 
 int main(){
-	//1. »ñÈ¡Êı¾İÏà¹Ø²ÎÊı£»ÈçÊı¾İÊäÈëÂ·¾¶¡¢Êä³öÂ·¾¶¡¢Êı¾İÀàĞÍ
+	//1. è·å–æ•°æ®ç›¸å…³å‚æ•°ï¼›å¦‚æ•°æ®è¾“å…¥è·¯å¾„ã€è¾“å‡ºè·¯å¾„ã€æ•°æ®ç±»å‹
 	std::string univer_model_fileName = "D:\\WorkSpace\\SGGlobe\\testdata\\obj\\zhangzhou\\zhangzhou.obj";
 
 	std::string las_fileName = "D:\\WorkSpace\\SGGlobe\\testdata\\obj\\zhangzhou\\zhangzhou.obj";
