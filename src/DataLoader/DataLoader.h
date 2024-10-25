@@ -1,6 +1,8 @@
 #pragma once
 #include <memory>
+#include <assimp/scene.h>
 #include "../Core/Base3DData.h"
+#include "../Core/Model.h"
 
 namespace BBGLOBE {
 	/*
@@ -14,7 +16,19 @@ namespace BBGLOBE {
 		~DataLoader();
 
 	public:
-		std::shared_ptr<Base3DData> LoadModel(const std::string& fileName);
-		std::shared_ptr<Base3DData> LoadLas(const std::string& fileName);
+		/*
+		** 加载三维模型，转换为通用的三维数据
+		*/
+		Base3DDataPtr LoadModel(const std::string& fileName);
+		
+		/*
+		** 加载点云模型，转换为通用的三维数据
+		*/
+		Base3DDataPtr LoadLas(const std::string& fileName);
+
+	private:
+		void ProcessNode(aiNode* node, const aiScene* scene, const aiMatrix4x4& parent, ModelPtr& model);
+		void ProcessChildNode(aiNode *node, const aiScene *scene, const aiMatrix4x4& parent, ModelPtr& model);
+		MeshPtr ProcessMesh(aiMesh *mesh, aiNode* node, const aiScene *scene, const aiMatrix4x4& mat);
 	};
 }

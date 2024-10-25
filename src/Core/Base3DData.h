@@ -1,6 +1,7 @@
 #pragma once
 
 #include <string>
+#include <memory>
 
 namespace BBGLOBE {
 
@@ -17,4 +18,6 @@ namespace BBGLOBE {
 		*/
 		virtual std::string getType() const = 0;
 	};
+
+	using Base3DDataPtr = std::shared_ptr<Base3DData>;
 }

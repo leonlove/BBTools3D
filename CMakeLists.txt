@@ -26,6 +26,8 @@ list(APPEND CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake")
 # 设置第三方库路径
 set(THIRD_PARTY_INSTALL_DIR ${CMAKE_SOURCE_DIR}/third/install)
 
+include_directories(${THIRD_PARTY_INSTALL_DIR})
+
 # 添加Assimp
 # find_package(assimp REQUIRED)
 include_directories(${THIRD_PARTY_INSTALL_DIR}/assimp/include)

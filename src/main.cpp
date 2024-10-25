@@ -9,19 +9,19 @@ int main(){
 	//1. 获取数据相关参数；如数据输入路径、输出路径、数据类型
 	std::string univer_model_fileName = "D:\\WorkSpace\\SGGlobe\\testdata\\obj\\zhangzhou\\zhangzhou.obj";
 
-	std::string las_fileName = "D:\\WorkSpace\\SGGlobe\\testdata\\obj\\zhangzhou\\zhangzhou.obj";
+	std::string las_fileName = u8"D:\\WorkSpace\\MyGlobe\\02_CPlusPlus\\BBTools3D\\testdata\\las\\dongda1lu\\las(#98-#245)\\las\\dd_132-145_bridges.las";
 
 	TaskManager taskManager;
-	if (!taskManager.LoadData(univer_model_fileName,DataType::eDataTypeModel))
+	if (!taskManager.LoadData(univer_model_fileName, DataType::eDataTypeModel))
 	{
 		cout << "LoadData " << univer_model_fileName << " failed!" << endl;
 		return -1;
 	}
-	if (!taskManager.LoadData(las_fileName, DataType::eDataTypePoint))
-	{
-		cout << "LoadData " << las_fileName << " failed!" << endl;
-		return -1;
-	}
+	//if (!taskManager.LoadData(las_fileName, DataType::eDataTypePoint))
+	//{
+	//	cout << "LoadData " << las_fileName << " failed!" << endl;
+	//	return -1;
+	//}
 	cout << "LoadData Success" << endl;
 
 	if (!taskManager.ProcessData())

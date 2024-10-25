@@ -15,6 +15,9 @@ namespace BBGLOBE {
 		Model() {}
 		virtual ~Model() {}
 
+		void SetName(const std::string& val) {
+			mName = val;
+		}
 		/*
 		** 返回数据类型
 		*/
@@ -25,6 +28,7 @@ namespace BBGLOBE {
 		void AddMesh(MeshPtr mesh);
 
 	private:
+		std::string			 mName;			// 模型名称
 		std::vector<MeshPtr> mMeshs;
 	};
 
