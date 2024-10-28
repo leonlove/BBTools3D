@@ -1,5 +1,4 @@
 #pragma once
-#pragma once
 
 namespace BBGLOBE {
 
@@ -9,4 +8,6 @@ namespace BBGLOBE {
 		eDataTypePoint,
 		eDataTypeGIM,
 	};
+
+	const std::string osDirSep = "/";
 }
