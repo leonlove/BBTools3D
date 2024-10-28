@@ -1,0 +1,11 @@
+prefix=D:/WorkSpace/MyGlobe/02_CPlusPlus/BBTools3D/third/install/assimp
+exec_prefix=D:/WorkSpace/MyGlobe/02_CPlusPlus/BBTools3D/third/install/assimp/
+libdir=D:/WorkSpace/MyGlobe/02_CPlusPlus/BBTools3D/third/install/assimp/lib
+includedir=D:/WorkSpace/MyGlobe/02_CPlusPlus/BBTools3D/third/install/assimp/../include/include
+
+Name: Assimp
+Description: Import various well-known 3D model formats in an uniform manner.
+Version: 5.0.0
+Libs: -L${libdir} -lassimp
+Libs.private:  
+Cflags: -I${includedir}
