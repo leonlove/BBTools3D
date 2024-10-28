@@ -38,6 +38,11 @@ link_directories(${THIRD_PARTY_INSTALL_DIR}/assimp/lib)
 include_directories(${THIRD_PARTY_INSTALL_DIR}/laslib/include)
 link_directories(${THIRD_PARTY_INSTALL_DIR}/laslib/lib)
 
+# 添加spdlog
+# find_package(spdlog REQUIRED)
+include_directories(${THIRD_PARTY_INSTALL_DIR}/spdlog/include)
+link_directories(${THIRD_PARTY_INSTALL_DIR}/spdlog/lib)
+
 # 查找指定目录下的所有源文件，并将名称保存到制定变量名
 # 但是不会把头文件添加进去。需使用另一种办法 使用FILE变量
 # aux_source_directory(./src DIR_SRCS)
@@ -61,5 +66,6 @@ add_executable(BBTools3D ${source_files} ${header_files})
 target_link_libraries(BBTools3D
     ${THIRD_PARTY_INSTALL_DIR}/assimp/lib/assimp-vc140-mt.lib
 	${THIRD_PARTY_INSTALL_DIR}/laslib/lib/Laslib.lib
+	${THIRD_PARTY_INSTALL_DIR}/spdlog/lib/spdlog.lib
 )
 
