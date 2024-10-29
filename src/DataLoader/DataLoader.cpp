@@ -43,10 +43,10 @@ Base3DDataPtr DataLoader::LoadModel(const std::string& fileName)
 	if (!scene || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode)
 		return nullptr;
 
-	ModelPtr modelptr = nullptr;
+	ModelPtrArray outModelptrArray;
 
 	aiMatrix4x4 baseMatrix;
-	ProcessNode(scene->mRootNode, scene, baseMatrix, modelptr);
+	ProcessNode(scene->mRootNode, scene, baseMatrix, outModelptrArray);
 
 	return _data3D;
 }
@@ -79,35 +79,41 @@ Base3DDataPtr DataLoader::LoadLas(const std::string& fileName)
 	return _data3D;
 }
 
-void DataLoader::ProcessNode(aiNode* node, const aiScene* scene, const aiMatrix4x4& parent, ModelPtr& model) {
-
-	if (node->mNumChildren <= 0)
-		return;
-
-	model = std::make_shared<Model>();
-	model->SetName(node->mName.C_Str());
-	const aiMatrix4x4& abs = parent * node->mTransformation;
-	for (unsigned int i = 0; i < node->mNumChildren; i++)
-	{
-		ProcessChildNode(node->mChildren[i], scene, abs, model);
-	}
-}
-
-void DataLoader::ProcessChildNode(aiNode *node, const aiScene *scene, const aiMatrix4x4& parent, ModelPtr& model)
+void DataLoader::ProcessNode(aiNode *node, const aiScene *scene, const aiMatrix4x4& parent, ModelPtrArray& outModels)
 {
-	const aiMatrix4x4& abs = parent * node->mTransformation;
-	for (unsigned int i = 0; i < node->mNumMeshes; i++)
-	{
-		int index = node->mMeshes[i];
-		aiMesh* mesh = scene->mMeshes[node->mMeshes[i]];
-		MeshPtr meshptr = ProcessMesh(mesh, node, scene, abs);
-		if (meshptr == nullptr)
-			continue;
+	std::string nodeName = node->mName.length == 0 ? "" : StringConverter::GetTempUseString(std::string(node->mName.C_Str()));
+	if (nodeName.empty() && node->mParent != nullptr)
+		nodeName = std::string(node->mParent->mName.C_Str());
 
-		model->AddMesh(meshptr);
+	const aiMatrix4x4& abs = parent * node->mTransformation;
+
+	unsigned int currentMeshIdx = 0;
+	while (currentMeshIdx < node->mNumMeshes)
+	{
+		unsigned int endMeshIdx = currentMeshIdx + node->mNumMeshes;
+		ModelPtr modelPtr = nullptr;
+		if (endMeshIdx - currentMeshIdx > 0)
+		{
+			modelPtr = std::make_shared<Model>();
+			modelPtr->SetName(nodeName);
+		}
+
+		for (unsigned int i = currentMeshIdx; i < endMeshIdx; i++)
+		{
+			unsigned int meshIndex = node->mMeshes[i];
+			aiMesh* mesh = scene->mMeshes[node->mMeshes[i]];
+			MeshPtr meshptr = ProcessMesh(mesh, node, scene, abs);
+			if (meshptr == nullptr)
+				continue;
+
+			modelPtr->AddMesh(meshptr);
+		}
+		outModels.push_back(modelPtr);
+
+		currentMeshIdx = endMeshIdx;
 	}
 	for (unsigned int i = 0; i < node->mNumChildren; i++)
-		ProcessChildNode(node->mChildren[i], scene, abs, model);
+		ProcessNode(node->mChildren[i], scene, abs, outModels);
 }
 
 

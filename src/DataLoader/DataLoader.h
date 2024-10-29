@@ -25,8 +25,7 @@ namespace BBGLOBE {
 
 	private:
 		// 解析Assimp的场景结构
-		void ProcessNode(aiNode* node, const aiScene* scene, const aiMatrix4x4& parent, ModelPtr& model);
-		void ProcessChildNode(aiNode *node, const aiScene *scene, const aiMatrix4x4& parent, ModelPtr& model);
+		void ProcessNode(aiNode* node, const aiScene* scene, const aiMatrix4x4& parent, ModelPtrArray& outModels);
 
 		// 解析Assimp的场景结构中的网格信息
 		MeshPtr ProcessMesh(aiMesh* mesh, aiNode* node, const aiScene* scene, const aiMatrix4x4& mat);

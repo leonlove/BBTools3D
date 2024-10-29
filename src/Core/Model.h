@@ -33,4 +33,5 @@ namespace BBGLOBE {
 	};
 
 	using ModelPtr = std::shared_ptr<Model>;
+	using ModelPtrArray = std::vector<ModelPtr>;
 }
