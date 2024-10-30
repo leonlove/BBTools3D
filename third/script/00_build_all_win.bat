@@ -64,6 +64,8 @@ REM call %dir_root%\win\build_sqlite.bat
 REM call %dir_root%\win\build_curl.bat
 REM call %dir_root%\win\build_tiff.bat
 REM call %dir_root%\win\build_googletest.bat
-call %dir_root%\win\build_proj.bat
+REM call %dir_root%\win\build_proj.bat
+
+call %dir_root%\win\build_geos.bat
 
 REM pause>nul 
