@@ -1,0 +1,11 @@
+prefix=D:/WorkSpace/MyGlobe/02_CPlusPlus/BBTools3D/third/install/tiff
+exec_prefix=D:/WorkSpace/MyGlobe/02_CPlusPlus/BBTools3D/third/install/tiff
+libdir=D:/WorkSpace/MyGlobe/02_CPlusPlus/BBTools3D/third/install/tiff/lib
+includedir=D:/WorkSpace/MyGlobe/02_CPlusPlus/BBTools3D/third/install/tiff/include
+
+Name: libtiff
+Description:  Tag Image File Format (TIFF) library.
+Version: 4.1.0
+Libs: -LD:/WorkSpace/MyGlobe/02_CPlusPlus/BBTools3D/third/install/tiff/lib -ltiff
+Libs.private: 
+Cflags: -ID:/WorkSpace/MyGlobe/02_CPlusPlus/BBTools3D/third/install/tiff/include

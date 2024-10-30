@@ -44,19 +44,22 @@ set package_dir=%dir_build%\laslib
 
 :: 解压源码包
 cd %dir_build%
-if not exist %package_dir% (
+if exist %package_dir% (
+	del /s /q %package_dir%\*.*
+	rd /s /q %package_dir%
+	md %package_dir%
+) else (
+	md %package_dir%
+)
 
-	mkdir %package_dir%
+:: 使用7z.exe先解压.gz部分
+"%SevenZipPath%" x "%dir_package%\%package_name%" -o"%package_dir%"
 
-	:: 使用7z.exe先解压.gz部分
-	"%SevenZipPath%" x "%dir_package%\%package_name%" -o"%package_dir%"
-
-	:: 检查解压.gz部分是否成功
-	if %ERRORLEVEL% neq 0 (
-		echo Failed to extract .gz part of %package_name%.
-		echo Failed to extract .gz part of %package_name%. >> %log_file%
-		exit /b %ERRORLEVEL%
-	)
+:: 检查解压.gz部分是否成功
+if %ERRORLEVEL% neq 0 (
+	echo Failed to extract .gz part of %package_name%.
+	echo Failed to extract .gz part of %package_name%. >> %log_file%
+	exit /b %ERRORLEVEL%
 )
 
 :: 获取解压后的.tar文件名

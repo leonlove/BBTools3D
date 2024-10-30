@@ -55,24 +55,15 @@ if not exist %dir_log% (
 )
 
 REM call %dir_root%\win\build_assimp.bat
-REM if %ERRORLEVEL% NEQ 0 (
-	REM echo The script failed with error level %ERRORLEVEL%.
-	REM exit /b %ERRORLEVEL%
-REM )
-REM echo %dir_root%\win\build_assimp.bat executed successfully.
-
 REM call %dir_root%\win\build_laslib.bat
-REM if %ERRORLEVEL% NEQ 0 (
-	REM echo The script failed with error level %ERRORLEVEL%.
-	REM exit /b %ERRORLEVEL%
-REM )
-REM echo %dir_root%\win\build_laslib.bat executed successfully.
+REM call %dir_root%\win\build_spdlog.bat
 
-call %dir_root%\win\build_spdlog.bat
-if %ERRORLEVEL% NEQ 0 (
-	echo The script failed with error level %ERRORLEVEL%.
-	exit /b %ERRORLEVEL%
-)
-echo %dir_root%\win\build_spdlog.bat executed successfully.
+REM 编译GDAL，需要proj和geos库
+REM 编译proj，需要sqlite3、tiff、curl、googletest库
+REM call %dir_root%\win\build_sqlite.bat
+REM call %dir_root%\win\build_curl.bat
+REM call %dir_root%\win\build_tiff.bat
+REM call %dir_root%\win\build_googletest.bat
+call %dir_root%\win\build_proj.bat
 
 REM pause>nul 
