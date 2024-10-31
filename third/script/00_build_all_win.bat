@@ -66,6 +66,7 @@ REM call %dir_root%\win\build_tiff.bat
 REM call %dir_root%\win\build_googletest.bat
 REM call %dir_root%\win\build_proj.bat
 
-call %dir_root%\win\build_geos.bat
+REM call %dir_root%\win\build_geos.bat
+call %dir_root%\win\build_gdal.bat
 
 REM pause>nul 

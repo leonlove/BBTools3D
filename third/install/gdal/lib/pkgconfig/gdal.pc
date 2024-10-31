@@ -1,0 +1,17 @@
+CONFIG_VERSION=3.5.1
+CONFIG_INST_PREFIX=D:/WorkSpace/MyGlobe/02_CPlusPlus/BBTools3D/third/install/gdal
+CONFIG_INST_LIBS=-LIBPATH:D:/WorkSpace/MyGlobe/02_CPlusPlus/BBTools3D/third/install/gdal/lib gdal
+CONFIG_INST_CFLAGS=-ID:/WorkSpace/MyGlobe/02_CPlusPlus/BBTools3D/third/install/gdal/include
+CONFIG_INST_DATA=D:/WorkSpace/MyGlobe/02_CPlusPlus/BBTools3D/third/install/gdal/share/gdal
+prefix=${CONFIG_INST_PREFIX}
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+includedir=${exec_prefix}/include
+datadir=${CONFIG_INST_DATA}
+
+Name: libgdal
+Description: Geospatial Data Abstraction Library
+Version: ${CONFIG_VERSION}
+Libs: ${CONFIG_INST_LIBS}
+Libs.private: wbemuuid D:\WorkSpace\MyGlobe\02_CPlusPlus\BBTools3D\third\script\..\install\tiff\lib\tiff.lib ws2_32 D:\WorkSpace\MyGlobe\02_CPlusPlus\BBTools3D\third\script\..\install\curl\lib\libcurl_imp.lib D:/WorkSpace/MyGlobe/02_CPlusPlus/BBTools3D/third/install/sqlite/lib/sqlite3.lib legacy_stdio_definitions.lib odbccp32.lib D:/WorkSpace/MyGlobe/02_CPlusPlus/BBTools3D/third/install/geos/lib/geos_c.lib psapi D:\WorkSpace\MyGlobe\02_CPlusPlus\BBTools3D\third\script\..\install\proj\lib\proj.lib
+Cflags: ${CONFIG_INST_CFLAGS}
