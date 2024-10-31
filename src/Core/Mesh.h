@@ -3,22 +3,13 @@
 #include <vector>
 #include <map>
 #include <memory>
+#include "../Core/Texture.h"
+#include "../utils/Types.h"
 #include "../utils/Point2.h"
 #include "../utils/Point3.h"
-#include "../Core/Texture.h"
+#include "../utils/BoundingVolume.h"
 
 namespace BBGLOBE {
-
-
-	//设置成员变量的Set和Get方法
-	#define MemberFun(type, name)\
-		public:\
-			inline void Set##name(type v){\
-				m##name = v;\
-			}\
-			inline type Get##name(){\
-				return m##name;\
-			}
 
 	enum class MeshType
 	{
@@ -81,6 +72,8 @@ namespace BBGLOBE {
 		//一个网格可能含有多张纹理，所以需要多个网格纹理坐标
 		TextureUVPtrMapArray			mTextureUVPtrMapArray;		  //网格纹理UV容器 
 		TexturePtrMapArray				mTexturePtrMapArray;		  //网格纹理map容器
+
+		BoundingVolumeBox				mBoundingVolumeBox;			  //网格数据的包围盒
 	};
 
 	using MeshPtr = std::shared_ptr<Mesh>;
