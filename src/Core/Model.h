@@ -5,6 +5,7 @@
 #include "mesh.h"
 #include "Base3DData.h"
 #include "../utils/Types.h"
+#include "../utils/Transformation.h"
 
 namespace BBGLOBE {
 
@@ -13,8 +14,8 @@ namespace BBGLOBE {
 	*/
 	class Model: public Base3DData {
 	public:
-		Model() {}
-		virtual ~Model() {}
+		Model();
+		virtual ~Model();
 
 
 		// 返回数据类型
@@ -33,15 +34,21 @@ namespace BBGLOBE {
 		// 计算模型包围盒
 		void DirtyBound();
 
+		// 坐标转换——将网格的顶点转换为以地理坐标为中心点的局部坐标
+		void CoordinateTransform();
+
+		ModelCoordinateSystemPtr GetModelCoordinateSystem();
+
 	private:
-		std::string					mName;			// 模型名称
-		double						mLon;			// 模型地理坐标-经度
-		double						mLat;			// 模型地理坐标-纬度
-		double						mHeight;		// 模型地理坐标-高度
+		std::string						mName;							// 模型名称
+		double							mLon;							// 模型地理坐标-经度
+		double							mLat;							// 模型地理坐标-纬度
+		double							mHeight;						// 模型地理坐标-高度
 
-		std::vector<MeshPtr>		mMeshs;			// 模型的所有网格数据
-		BoundingVolumeBox			mBoundingBox;	// 模型包围盒
+		std::vector<MeshPtr>			mMeshs;							// 模型的所有网格数据
+		BoundingVolumeBox				mBoundingBox;					// 模型包围盒
 
+		ModelCoordinateSystemPtr		mModelCoordinateSystemPtr;		// 模型坐标转换系统
 	};
 
 	using ModelPtr = std::shared_ptr<Model>;

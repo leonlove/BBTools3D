@@ -48,6 +48,14 @@ Base3DDataPtr DataLoader::LoadModel(const std::string& fileName)
 	aiMatrix4x4 baseMatrix;
 	ProcessNode(scene->mRootNode, scene, baseMatrix, outModelptrArray);
 
+	for (auto modelPtr : outModelptrArray)
+	{
+		modelPtr->SetLon(120.0);
+		modelPtr->SetLat(30.0);
+		modelPtr->SetHeight(0.0);
+
+		modelPtr->CoordinateTransform();
+	}
 	return _data3D;
 }
 
@@ -96,9 +104,6 @@ void DataLoader::ProcessNode(aiNode *node, const aiScene *scene, const aiMatrix4
 		{
 			modelPtr = std::make_shared<Model>();
 			modelPtr->SetName(nodeName);
-			modelPtr->SetLon(120.0);
-			modelPtr->SetLat(30.0);
-			modelPtr->SetHeight(0.0);
 		}
 
 		for (unsigned int i = currentMeshIdx; i < endMeshIdx; i++)
