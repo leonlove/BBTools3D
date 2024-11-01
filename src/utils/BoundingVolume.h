@@ -13,59 +13,18 @@ namespace BBGLOBE {
 		BoundingVolumeBox(const std::initializer_list<double>& values);
 
 		// 拷贝构造函数
-		BoundingVolumeBox(const BoundingVolumeBox& box) {
-			mData = box.mData;
-		}
+		BoundingVolumeBox(const BoundingVolumeBox& box);
 
 		// 拷贝构造函数 右值引用方式
-		BoundingVolumeBox(BoundingVolumeBox&& box) noexcept {
-			mData.swap(box.mData);
-		}
+		BoundingVolumeBox(BoundingVolumeBox&& box) noexcept;
 
-		bool IsValid() const {
-			if (mData.empty() || mData.size() != 6)
-				return false;
-			for (auto num : mData)
-			{
-				if (std::isnan(num))
-					return false;
-			}
-			return true;
-		}
+		bool IsValid() const;
 
-		BoundingVolumeBox& Union(const Point3d& pt) {
-			if (!IsValid()) {
-				mData = std::vector<double>{ pt.x(), pt.y(), pt.x(), pt.y(), pt.z(), pt.z() };
-				return *this;
-			}
-			mData[0] = Math::Min(mData[0], pt.x());
-			mData[1] = Math::Min(mData[1], pt.y());
-			mData[4] = Math::Min(mData[4], pt.z());
+		BoundingVolumeBox& Union(const Point3d& pt);
 
-			mData[2] = Math::Max(mData[2], pt.x());
-			mData[3] = Math::Max(mData[3], pt.y());
-			mData[5] = Math::Max(mData[5], pt.z());
+		BoundingVolumeBox& Union(const BoundingVolumeBox& box);
 
-			return *this;
-		}
-
-		BoundingVolumeBox& Union(const BoundingVolumeBox& box) {
-			// 先做安全检测
-			if (!box.IsValid()) return *this;
-			if (!IsValid()) {
-				mData = box.mData;
-				return *this;
-			}
-			mData[0] = Math::Min(mData[0], box.mData[0]);
-			mData[1] = Math::Min(mData[1], box.mData[1]);
-			mData[4] = Math::Min(mData[4], box.mData[4]);
-
-			mData[2] = Math::Max(mData[2], box.mData[2]);
-			mData[3] = Math::Max(mData[3], box.mData[3]);
-			mData[5] = Math::Max(mData[5], box.mData[5]);
-
-			return *this;
-		}
+		Point3d Center3D() const;
 
 		//double Width() const;
 		//double Height() const;
