@@ -61,6 +61,9 @@ namespace BBGLOBE {
 		void SetTexturePtr(unsigned int num, TexturePtr texturePtr);
 		TexturePtr GetTexturePtr(unsigned int num);
 
+		// 是否重新计算包围盒，默认为false，直接获取包围盒；若为true，则获取重新计算后的包围盒
+		BoundingVolumeBox GetBoudingBox(bool force = false);
+
 	private:
 		std::string						mID;						  //网格唯一标识
 		MeshType						mMeshType;					  //网格类型

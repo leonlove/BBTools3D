@@ -2,15 +2,16 @@
 
 namespace BBGLOBE {
 
+	const std::string osDirSep = "/";
+
+	constexpr double PI = 3.141592653589793238462643383279;
+
 	enum class DataType {
 		eDataTypeUnknown = -1,
 		eDataTypeModel = 0,
 		eDataTypePoint,
 		eDataTypeGIM,
 	};
-
-	const std::string osDirSep = "/";
-
 
 	//设置成员变量的Set和Get方法
 	#define MemberFun(type, name)\

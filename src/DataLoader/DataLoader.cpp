@@ -96,6 +96,9 @@ void DataLoader::ProcessNode(aiNode *node, const aiScene *scene, const aiMatrix4
 		{
 			modelPtr = std::make_shared<Model>();
 			modelPtr->SetName(nodeName);
+			modelPtr->SetLon(120.0);
+			modelPtr->SetLat(30.0);
+			modelPtr->SetHeight(0.0);
 		}
 
 		for (unsigned int i = currentMeshIdx; i < endMeshIdx; i++)
@@ -108,6 +111,8 @@ void DataLoader::ProcessNode(aiNode *node, const aiScene *scene, const aiMatrix4
 
 			modelPtr->AddMesh(meshptr);
 		}
+		modelPtr->DirtyBound();
+
 		outModels.push_back(modelPtr);
 
 		currentMeshIdx = endMeshIdx;
