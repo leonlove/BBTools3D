@@ -6,6 +6,9 @@ namespace BBGLOBE {
 
 	constexpr double PI = 3.141592653589793238462643383279;
 
+	const unsigned int HIGHEST_LEVEL = 22;			// 模型生产时最深层级
+	const unsigned int LOD_LEVEL_COUNT = 8;			// 模型生产时切片层级
+
 	enum class DataType {
 		eDataTypeUnknown = -1,
 		eDataTypeModel = 0,

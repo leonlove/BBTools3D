@@ -6,6 +6,6 @@
 namespace BBGLOBE {
 	class StandardModel {
 	public:
-		static std::shared_ptr<Base3DData> TriangleModel();
+		static std::shared_ptr<Model> TriangleModel();
 	};
 }

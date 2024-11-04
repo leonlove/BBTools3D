@@ -4,6 +4,7 @@
 #include "../Core/Base3DData.h"
 #include "../Core/Model.h"
 #include "../Core/Texture.h"
+#include "../utils/QuadTreeIndex.h"
 
 namespace BBGLOBE {
 	/*
@@ -39,8 +40,7 @@ namespace BBGLOBE {
 		std::vector<TexturePtr> LoadMaterialTextures(const aiScene *scene, aiMaterial *mat, aiTextureType type, std::string typeName);
 
 	private:
-
-		std::string			mCurrentFileDir;	//读取文件夹的路径
-		TexturePtrArray		mTexturePtrArray;	//纹理容器
+		std::string				mCurrentFileDir;	//读取文件夹的路径
+		TexturePtrArray			mTexturePtrArray;	//纹理容器
 	};
 }

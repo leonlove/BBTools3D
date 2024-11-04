@@ -1,4 +1,7 @@
 #pragma once
+#include "../utils/QuadTreeIndex.h"
+#include "../Core/Model.h"
+#include "../Core/Base3DData.h"
 
 namespace BBGLOBE {
 	/*
@@ -10,7 +13,9 @@ namespace BBGLOBE {
 	public:
 		Processor();
 		~Processor();
-	private:
 
+		bool ProcessData(Base3DDataPtr currentData);
+	private:
+		QuadTreeIndexPtr		mQuadTreeIndex;
 	};
 }

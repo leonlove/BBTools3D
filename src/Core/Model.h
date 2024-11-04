@@ -3,7 +3,6 @@
 #include <string>
 #include <vector>
 #include "mesh.h"
-#include "Base3DData.h"
 #include "../utils/Types.h"
 #include "../utils/Transformation.h"
 
@@ -12,16 +11,16 @@ namespace BBGLOBE {
 	/**
 	* @brief 自定义三维数据基类
 	*/
-	class Model: public Base3DData {
+	class Model {
 	public:
 		Model();
 		virtual ~Model();
 
 
-		// 返回数据类型
-		std::string getType() const override {
-			return "Model";
-		}
+		//// 返回数据类型
+		//std::string getType() const override {
+		//	return "Model";
+		//}
 
 		MemberFun(const std::string&, Name);
 

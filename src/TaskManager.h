@@ -21,10 +21,10 @@ namespace BBGLOBE {
 		bool Converter3DTiles();
 
 	private:
-		DataLoader	mDataLoader;			//数据加载类
-		Processor	mProcessor;				//数据处理类
-		Converter	mConverter;				//数据转换类
+		DataLoader		mDataLoader;			//数据加载类
+		Processor		mProcessor;				//数据处理类
+		Converter		mConverter;				//数据转换类
 
-		std::shared_ptr<Base3DData> mCurrentData;	//数据加载类加载后的三维数据
+		Base3DDataPtr	mCurrentData;	//数据加载类加载后的三维数据
 	};
 }

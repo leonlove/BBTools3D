@@ -1,4 +1,6 @@
 #pragma once
+#include "../utils/QuadTreeIndex.h"
+#include "../utils/Types.h"
 
 namespace BBGLOBE {
 	/*
@@ -11,6 +13,5 @@ namespace BBGLOBE {
 		Converter();
 		~Converter();
 	private:
-
 	};
 }

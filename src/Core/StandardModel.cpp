@@ -2,7 +2,7 @@
 #include "Model.h"
 using namespace BBGLOBE;
 
-std::shared_ptr<BBGLOBE::Base3DData> StandardModel::TriangleModel()
+std::shared_ptr<Model> StandardModel::TriangleModel()
 {
 	std::shared_ptr<Model> modelPtr = std::make_shared<Model>();
 

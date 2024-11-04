@@ -21,7 +21,6 @@ using namespace BBGLOBE;
 
 DataLoader::DataLoader()
 {
-
 }
 
 DataLoader::~DataLoader()
@@ -32,7 +31,7 @@ DataLoader::~DataLoader()
 Base3DDataPtr DataLoader::LoadModel(const std::string& fileName)
 {
 	LogIns.info("Loading Model...");
-	std::shared_ptr<Base3DData> _data3D = std::make_shared<Model>();
+	std::shared_ptr<Base3DData> _data3D = std::make_shared<Base3DData>();
 
 	mCurrentFileDir = FileSystem::ParentPath(fileName);
 
@@ -43,20 +42,9 @@ Base3DDataPtr DataLoader::LoadModel(const std::string& fileName)
 	if (!scene || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode)
 		return nullptr;
 
-	ModelPtrArray outModelptrArray;
-
 	aiMatrix4x4 baseMatrix;
-	ProcessNode(scene->mRootNode, scene, baseMatrix, outModelptrArray);
+	ProcessNode(scene->mRootNode, scene, baseMatrix, _data3D->mModelptrArray);
 
-	for (auto modelPtr : outModelptrArray)
-	{
-		modelPtr->SetLon(120.0);
-		modelPtr->SetLat(30.0);
-		modelPtr->SetHeight(0.0);
-
-		// 坐标转换——将网格的顶点转换为以地理坐标为中心点的局部坐标
-		modelPtr->CoordinateTransform();
-	}
 	return _data3D;
 }
 
@@ -64,7 +52,7 @@ Base3DDataPtr DataLoader::LoadModel(const std::string& fileName)
 Base3DDataPtr DataLoader::LoadLas(const std::string& fileName)
 {
 	LogIns.info("Loading Las...");
-	std::shared_ptr<Base3DData> _data3D = std::make_shared<Model>();
+	std::shared_ptr<Base3DData> _data3D = std::make_shared<Base3DData>();
 
 	// 设置LAS读取对象
 	LASreadOpener lasreadopener;

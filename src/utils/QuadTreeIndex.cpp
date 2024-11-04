@@ -1,3 +1,3 @@
-#include "SpatialIndex.h"
+#include "QuadTreeIndex.h"
 
 using namespace BBGLOBE;

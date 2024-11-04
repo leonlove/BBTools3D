@@ -33,6 +33,9 @@ bool BBGLOBE::TaskManager::LoadData(std::string fileName, DataType eDataType)
 
 bool BBGLOBE::TaskManager::ProcessData()
 {
+	mProcessor.ProcessData(mCurrentData);
+
+
 	return true;
 }
 
