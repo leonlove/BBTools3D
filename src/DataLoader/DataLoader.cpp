@@ -31,7 +31,7 @@ DataLoader::~DataLoader()
 
 Base3DDataPtr DataLoader::LoadModel(const std::string& fileName)
 {
-	cout << "Loading Model " << endl;
+	LogIns.info("Loading Model...");
 	std::shared_ptr<Base3DData> _data3D = std::make_shared<Model>();
 
 	mCurrentFileDir = FileSystem::ParentPath(fileName);
@@ -54,6 +54,7 @@ Base3DDataPtr DataLoader::LoadModel(const std::string& fileName)
 		modelPtr->SetLat(30.0);
 		modelPtr->SetHeight(0.0);
 
+		// 坐标转换——将网格的顶点转换为以地理坐标为中心点的局部坐标
 		modelPtr->CoordinateTransform();
 	}
 	return _data3D;
@@ -62,7 +63,7 @@ Base3DDataPtr DataLoader::LoadModel(const std::string& fileName)
 
 Base3DDataPtr DataLoader::LoadLas(const std::string& fileName)
 {
-	cout << "Loading Las " << endl;
+	LogIns.info("Loading Las...");
 	std::shared_ptr<Base3DData> _data3D = std::make_shared<Model>();
 
 	// 设置LAS读取对象
@@ -78,7 +79,7 @@ Base3DDataPtr DataLoader::LoadLas(const std::string& fileName)
 		F64 y = lasreader->point.get_y();
 		F64 z = lasreader->point.get_z();
 
-		cout << count++ << " x:" << x << " y:" << y << " z:" << z << endl;
+		LogIns.info("count:{0} x:{1} y:{2} z:{3}", count++, x, y, z);
 	}
 
 	lasreader->close();

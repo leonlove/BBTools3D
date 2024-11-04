@@ -1,11 +1,15 @@
 #include <iostream>
 #include "TaskManager.h"
 #include "utils/Types.h"
+#include "utils/Log.h"
 
 using namespace std;
 using namespace BBGLOBE;
 
 int main(){
+
+	LogIns.initLog();
+
 	//1. 获取数据相关参数；如数据输入路径、输出路径、数据类型
 	std::string univer_model_fileName = "D:\\WorkSpace\\SGGlobe\\testdata\\obj\\zhangzhou\\zhangzhou.obj";
 
@@ -14,29 +18,29 @@ int main(){
 	TaskManager taskManager;
 	if (!taskManager.LoadData(univer_model_fileName, DataType::eDataTypeModel))
 	{
-		cout << "LoadData " << univer_model_fileName << " failed!" << endl;
+		LogIns.error("LoadData {0} failed!", univer_model_fileName);
 		return -1;
 	}
 	//if (!taskManager.LoadData(las_fileName, DataType::eDataTypePoint))
 	//{
-	//	cout << "LoadData " << las_fileName << " failed!" << endl;
+	//	LogIns.error("LoadData {0} failed!", las_fileName);
 	//	return -1;
 	//}
-	cout << "LoadData Success" << endl;
+	LogIns.info("LoadData Success!");
 
 	if (!taskManager.ProcessData())
 	{
-		cout << "ProcessData failed" << endl;
+		LogIns.info("ProcessData failed!");
 		return -1;
 	}
-	cout << "ProcessData Success" << endl;
+	LogIns.info("ProcessData Success!");
 
 	if (!taskManager.Converter3DTiles())
 	{
-		cout << "Converter3DTiles failed" << endl;
+		LogIns.info("Converter3DTiles failed!");
 		return -1;
 	}
-	cout << "Converter3DTiles Success" << endl;
+	LogIns.info("Converter3DTiles Success!");
 
 	return 0;
 }

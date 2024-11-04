@@ -1,7 +1,6 @@
 #include "Log.h"
 #include "FileSystemUtil.h"
 #include "StringConverter.h"
-//#include "JsonUtil.h"
 
 #include <assert.h>
 using namespace std;
@@ -28,12 +27,6 @@ void BBGLOBE::Log::OutToStdErr(const std::string & key, const std::string & info
 {
 	std::lock_guard<std::mutex> locl(m_queueMtx);
 	LogIns.debug("{} {}", key, info);
-//#ifdef _WIN32
-//	std::cout << StringConverter::GetTempUseString(key) << StringConverter::GetTempUseString(info) << std::endl;
-//#else
-	//cout << key << info << endl;
-//#endif
-
 }
 
 void BBGLOBE::Log::OutLastErrToSeverStdErr(const std::string& key)
